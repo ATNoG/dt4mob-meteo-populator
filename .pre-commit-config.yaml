@@ -1,0 +1,27 @@
+repos:
+  - repo: https://github.com/tsvikas/sync-with-uv
+    rev: v0.1.0
+    hooks:
+      - id: sync-with-uv
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.1  # Update to latest version
+    hooks:
+      # Run the linter with auto-fix
+      - id: ruff-check
+        args: [--fix]
+        stages: [pre-push]
+      # Run the formatter
+      - id: ruff-format
+
+  # Local hooks run with uv
+  - repo: local
+    hooks:
+      # ty type checker
+      - id: ty
+        name: ty
+        entry: uv run ty check .
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true

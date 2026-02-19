@@ -1,0 +1,14 @@
+[project]
+name = "meteo-populator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+    "ruff>=0.15.1",
+    "ty>=0.0.17",
+]
