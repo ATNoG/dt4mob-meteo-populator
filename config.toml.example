@@ -1,0 +1,11 @@
+[ditto]
+base_url = "https://your-ditto-instance/api/2"
+username = "your-username"
+password = "your-password"
+
+[populator]
+polling_interval = 3600
+dry_run = false
+
+[logging]
+level = "DEBUG"
