@@ -1,6 +1,8 @@
-from typing import Union, List
+from typing import List, Union
+
+from pydantic import AliasChoices, BaseModel, Field
+
 from models.geo import Point
-from pydantic import BaseModel, Field, AliasChoices
 
 
 class Attributes(BaseModel):
