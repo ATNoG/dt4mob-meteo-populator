@@ -10,7 +10,7 @@ from utils.geo import closest_stations, representative_point
 
 async def fetch_all_things(session: ClientSession) -> list[Thing]:
     logger.info("Starting to fetch things from Ditto")
-    filters = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(eq(namespace,"meteo")))'
+    filters = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(like(thingId,"*meteo*")))'
     fields = "thingId,attributes(location,geometry,coordinates)"
     url_base = f"search/things?filter={filters}&fields={fields}"
 
