@@ -1,5 +1,5 @@
-import sys
 import json
+import sys
 
 from loguru import logger
 from pydantic import BaseModel
@@ -11,14 +11,16 @@ from pydantic_settings import (
 )
 
 
-class DittoSettings(BaseModel):
+class OidcSettings(BaseModel):
     base_url: str = ""
+    realm: str = ""
     username: str = ""
     password: str = ""
+    client_id: str = ""
+    scope: str = "openid"
 
 
 class PopulatorSettings(BaseModel):
-    polling_interval: int = 3600
     dry_run: bool = False
 
 
@@ -26,12 +28,18 @@ class LoggingSettings(BaseModel):
     level: str = "INFO"
 
 
+class StationSettings(BaseModel):
+    namespace: str = "internal"
+    subject: str = "meteo"
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(toml_file="config.toml")
 
-    ditto: DittoSettings = DittoSettings()
     populator: PopulatorSettings = PopulatorSettings()
     logging: LoggingSettings = LoggingSettings()
+    oidc: OidcSettings = OidcSettings()
+    station: StationSettings = StationSettings()
 
     @classmethod
     def settings_customise_sources(

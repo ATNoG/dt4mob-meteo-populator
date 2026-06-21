@@ -3,11 +3,11 @@
 A Python service that automatically associates Eclipse Ditto things with their
 closest weather stations from IPMA (Instituto Português do Mar e da Atmosfera).
 
-The service runs a continuous polling loop that fetches active weather stations
-from the IPMA API, retrieves all "Things" from Eclipse Ditto that have
-location/geometry data, calculates the closest weather stations for each thing
-based on geographic proximity, and adds an attribute with
-references to its nearest stations, in the form of Ditto Thing IDs.
+The service fetches active weather stations from the IPMA API, retrieves all
+"Things" from Eclipse Ditto that have location/geometry data, calculates the
+closest weather stations for each thing based on geographic proximity, and adds
+an attribute with references to its nearest stations, in the form of Ditto
+Thing IDs. It is designed to run as a Kubernetes CronJob.
 
 ## Configuration
 
@@ -20,7 +20,6 @@ username = "ditto"
 password = "..."
 
 [populator]
-polling_interval = 3600  # seconds between cycles
 dry_run = false          # set to true to skip actual patches
 
 [logging]

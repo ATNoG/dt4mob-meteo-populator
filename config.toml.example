@@ -1,11 +1,17 @@
-[ditto]
-base_url = "https://your-ditto-instance/api/2"
-username = "your-username"
-password = "your-password"
-
 [populator]
-polling_interval = 3600
-dry_run = false
+dry_run = true # Defaults to false
 
 [logging]
 level = "DEBUG"
+
+[oidc]
+base_url = "<base_url>"
+realm = "<realm>"
+username = "<username>"
+password= "<password>"
+client_id = "<client_id>"
+realm = "openid"
+
+[station]
+namespace = "<station_namespace>" # Defaults to "internal"
+subejct = "<station_subject>" # Defaults to "meteo"
