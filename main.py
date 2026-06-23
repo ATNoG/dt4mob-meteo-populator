@@ -1,22 +1,17 @@
 import asyncio
 import sys
 from datetime import datetime, timezone
-from enum import Enum
 
 from aiohttp import ClientSession
 from loguru import logger
 
 from interfaces.ditto import (
     fetch_all_things,
-    patch_closest_stations,
     populate_closest_stations,
 )
 from interfaces.ipma import fetch_active_stations
-from models.request import SearchResponse
-from models.station import Station
-from models.thing import PopulateResult, Thing
+from models.thing import PopulateResult
 from settings import settings
-from utils.geo import closest_stations, representative_point
 from utils.oidc import get_tokens, refresh_token
 
 

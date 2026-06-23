@@ -33,6 +33,11 @@ class StationSettings(BaseModel):
     subject: str = "meteo"
 
 
+class DittoFilter(BaseModel):
+    filter = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(like(thingId,"*meteo*")))'
+    fields = "thingId,attributes(location,geometry,coordinates)"
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(toml_file="config.toml")
 
@@ -40,6 +45,7 @@ class Settings(BaseSettings):
     logging: LoggingSettings = LoggingSettings()
     oidc: OidcSettings = OidcSettings()
     station: StationSettings = StationSettings()
+    filter: DittoFilter = DittoFilter()
 
     @classmethod
     def settings_customise_sources(
