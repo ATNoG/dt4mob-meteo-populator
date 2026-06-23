@@ -1,7 +1,8 @@
 # Meteo Populator
 
-A Python service that automatically associates Eclipse Ditto things with their
-closest weather stations from IPMA (Instituto Português do Mar e da Atmosfera).
+The Meteo Populator is a Python service that automatically associates Eclipse
+Ditto things with their closest weather stations from IPMA (Instituto Português
+do Mar e da Atmosfera).
 
 The service fetches active weather stations from the IPMA API, retrieves all
 "Things" from Eclipse Ditto that have location/geometry data, calculates the
@@ -11,42 +12,9 @@ Thing IDs. It is designed to run as a Kubernetes CronJob.
 
 ## Configuration
 
-Configuration is stored in `config.toml`:
+This section can be found in the [user guide](./docs/user.md)
 
-```toml
-[ditto]
-base_url = "https://dt4mob-staging.av.it.pt/api/2"
-username = "ditto"
-password = "..."
 
-[populator]
-dry_run = false          # set to true to skip actual patches
+## Deployment
 
-[logging]
-level = "DEBUG"
-```
-
-## Usage
-
-```bash
-# Install dependencies (using uv)
-uv sync
-
-# Run the service
-uv run main.py
-```
-
-## Dry Run Mode
-
-Set `dry_run = true` in `config.toml` to simulate the population cycle without making any changes to Ditto.
-
-## Development
-
-```bash
-# Install pre-commit hooks
-pre-commit install
-
-# Run linting
-ruff check .
-ruff format .
-```
+This section can be found in the [admin guide](./docs/admin.md)
