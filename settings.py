@@ -34,8 +34,8 @@ class StationSettings(BaseModel):
 
 
 class DittoFilter(BaseModel):
-    filter = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(like(thingId,"*meteo*")))'
-    fields = "thingId,attributes(location,geometry,coordinates)"
+    filter: str = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(like(thingId,"*meteo*")))'
+    fields: str = "thingId,attributes(location,geometry,coordinates)"
 
 
 class Settings(BaseSettings):
