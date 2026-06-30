@@ -10,9 +10,9 @@ from interfaces.ditto import (
     populate_closest_stations,
 )
 from interfaces.ipma import fetch_active_stations
+from interfaces.oidc import get_tokens, refresh_token
 from models.thing import PopulateResult
 from settings import settings
-from utils.oidc import get_tokens, refresh_token
 
 
 async def run() -> None:
