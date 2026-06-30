@@ -14,7 +14,6 @@ Thing IDs. It is designed to run as a Kubernetes CronJob.
 
 This section can be found in the [user guide](./docs/user.md)
 
-
 ## Deployment
 
 This section can be found in the [admin guide](./docs/admin.md)
