@@ -39,7 +39,9 @@ class Ditto(BaseModel):
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(toml_file="config.toml")
+    model_config = SettingsConfigDict(
+        toml_file="config.toml", env_prefix="METEO_", env_nested_delimiter="__"
+    )
 
     populator: PopulatorSettings = PopulatorSettings()
     logging: LoggingSettings = LoggingSettings()
@@ -56,7 +58,7 @@ class Settings(BaseSettings):
         dotenv_settings: PydanticBaseSettingsSource,
         file_secret_settings: PydanticBaseSettingsSource,
     ) -> tuple[PydanticBaseSettingsSource, ...]:
-        return (TomlConfigSettingsSource(settings_cls),)
+        return (env_settings, TomlConfigSettingsSource(settings_cls))
 
 
 def _formatter(record: dict) -> str:
