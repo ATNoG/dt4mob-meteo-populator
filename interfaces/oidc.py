@@ -14,14 +14,11 @@ class Tokens(BaseModel):
 
 
 async def get_tokens() -> Tokens | None:
-    base_url = settings.oidc.base_url
+    url = settings.oidc.url
     username = settings.oidc.username
     password = settings.oidc.password
     client_id = settings.oidc.client_id
-    realm = settings.oidc.realm
     scope = settings.oidc.scope
-
-    url = f"{base_url}/auth/realms/{realm}/protocol/openid-connect/token"
 
     data = {
         "grant_type": "password",
@@ -52,12 +49,9 @@ async def get_tokens() -> Tokens | None:
 
 
 async def refresh_token(refresh_token: str) -> Tokens | None:
-    base_url = settings.oidc.base_url
+    url = settings.oidc.url
     client_id = settings.oidc.client_id
-    realm = settings.oidc.realm
     scope = settings.oidc.scope
-
-    url = f"{base_url}/auth/realms/{realm}/protocol/openid-connect/token"
 
     data = {
         "grant_type": "refresh_token",

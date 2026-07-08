@@ -12,8 +12,7 @@ from pydantic_settings import (
 
 
 class OidcSettings(BaseModel):
-    base_url: str = ""
-    realm: str = ""
+    url: str = ""
     username: str = ""
     password: str = ""
     client_id: str = ""
@@ -33,7 +32,8 @@ class StationSettings(BaseModel):
     subject: str = "meteo"
 
 
-class DittoFilter(BaseModel):
+class Ditto(BaseModel):
+    url: str = ""
     filter: str = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(like(thingId,"*meteo*")))'
     fields: str = "thingId,attributes(location,geometry,coordinates)"
 
@@ -45,7 +45,7 @@ class Settings(BaseSettings):
     logging: LoggingSettings = LoggingSettings()
     oidc: OidcSettings = OidcSettings()
     station: StationSettings = StationSettings()
-    filter: DittoFilter = DittoFilter()
+    ditto: Ditto = Ditto()
 
     @classmethod
     def settings_customise_sources(

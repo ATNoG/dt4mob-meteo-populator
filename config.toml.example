@@ -5,12 +5,15 @@ dry_run = true # Defaults to false
 level = "DEBUG"
 
 [oidc]
-base_url = "<base_url>"
-realm = "<realm>"
+url = "<oidc_url>"
 username = "<username>"
 password= "<password>"
 client_id = "<client_id>"
-realm = "openid"
+
+[ditto]
+filter = 'and(eq(namespace,"geo-asset"),exists(attributes/coordinates))'
+fields = "thingId,attributes(coordinates)"
+url = "<api_url>"
 
 [station]
 namespace = "<station_namespace>" # Defaults to "internal"

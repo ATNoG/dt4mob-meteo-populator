@@ -10,8 +10,8 @@ from utils.geo import closest_stations, representative_point
 
 async def fetch_all_things(session: ClientSession) -> list[Thing]:
     logger.info("Starting to fetch things from Ditto")
-    filters = settings.filter.filter
-    fields = settings.filter.fields
+    filters = settings.ditto.filter
+    fields = settings.ditto.fields
     url_base = f"search/things?filter={filters}&fields={fields}"
 
     last_response: SearchResponse | None = None

@@ -21,9 +21,7 @@ async def run() -> None:
 
     headers: dict[str, str] = {"Authorization": f"Bearer {tokens.access}"}
 
-    async with ClientSession(
-        base_url=settings.oidc.base_url + "/api/2/", headers=headers
-    ) as s:
+    async with ClientSession(base_url=settings.ditto.url, headers=headers) as s:
         logger.info(
             "Starting population cycle",
             extra={"dry_run": settings.populator.dry_run},
