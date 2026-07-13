@@ -17,6 +17,7 @@ class OidcSettings(BaseModel):
     password: str = ""
     client_id: str = ""
     scope: str = "openid"
+    ca_file: str | None = None
 
 
 class PopulatorSettings(BaseModel):
@@ -36,6 +37,7 @@ class Ditto(BaseModel):
     url: str = ""
     filter: str = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(like(thingId,"*meteo*")))'
     fields: str = "thingId,attributes(location,geometry,coordinates)"
+    ca_file: str | None = None
 
 
 class Settings(BaseSettings):

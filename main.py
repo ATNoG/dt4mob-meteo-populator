@@ -1,8 +1,9 @@
-import asyncio
+import ssl
 import sys
+import asyncio
 from datetime import datetime, timezone
 
-from aiohttp import ClientSession
+from aiohttp import ClientSession, TCPConnector
 from loguru import logger
 
 from interfaces.ditto import (
@@ -21,7 +22,15 @@ async def run() -> None:
 
     headers: dict[str, str] = {"Authorization": f"Bearer {tokens.access}"}
 
-    async with ClientSession(base_url=settings.ditto.url, headers=headers) as s:
+    ssl_context = ssl.create_default_context()
+    if settings.ditto.ca_file is not None:
+        ssl_context.load_verify_locations(cafile=settings.ditto.ca_file)
+
+    async with ClientSession(
+        connector=TCPConnector(ssl=ssl_context),
+        base_url=settings.ditto.url,
+        headers=headers,
+    ) as s:
         logger.info(
             "Starting population cycle",
             extra={"dry_run": settings.populator.dry_run},

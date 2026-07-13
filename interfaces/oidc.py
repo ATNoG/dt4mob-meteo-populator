@@ -1,3 +1,4 @@
+import ssl
 from datetime import datetime, timedelta, timezone
 
 import aiohttp
@@ -28,7 +29,13 @@ async def get_tokens() -> Tokens | None:
         "scope": scope,
     }
 
-    async with aiohttp.ClientSession() as session:
+    ssl_context = ssl.create_default_context()
+    if settings.oidc.ca_file is not None:
+        ssl_context.load_verify_locations(cafile=settings.oidc.ca_file)
+
+    async with aiohttp.ClientSession(
+        connector=aiohttp.TCPConnector(ssl=ssl_context)
+    ) as session:
         async with session.post(url, data=data) as response:
             try:
                 response.raise_for_status()
@@ -60,7 +67,13 @@ async def refresh_token(refresh_token: str) -> Tokens | None:
         "scope": scope,
     }
 
-    async with aiohttp.ClientSession() as session:
+    ssl_context = ssl.create_default_context()
+    if settings.oidc.ca_file is not None:
+        ssl_context.load_verify_locations(cafile=settings.oidc.ca_file)
+
+    async with aiohttp.ClientSession(
+        connector=aiohttp.TCPConnector(ssl=ssl_context)
+    ) as session:
         async with session.post(url, data=data) as response:
             try:
                 response.raise_for_status()
