@@ -35,7 +35,7 @@ class StationSettings(BaseModel):
 
 class Ditto(BaseModel):
     url: str = ""
-    filter: str = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(like(thingId,"*meteo*")))'
+    filter: str = 'and(or(exists(attributes/location),exists(attributes/geometry),exists(attributes/coordinates)),not(eq(namespace,"meteo")))'
     fields: str = "thingId,attributes(location,geometry,coordinates)"
     ca_file: str | None = None
 
