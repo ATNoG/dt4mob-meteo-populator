@@ -29,8 +29,8 @@ class LoggingSettings(BaseModel):
 
 
 class StationSettings(BaseModel):
-    namespace: str = "internal"
-    subject: str = "meteo"
+    namespace: str = "meteo"
+    subject: str = "internal"
 
 
 class Ditto(BaseModel):
