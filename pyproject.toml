@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "meteo-populator"
 version = "0.1.0"
@@ -17,3 +21,11 @@ dev = [
     "ruff>=0.15.1",
     "ty>=0.0.17",
 ]
+
+[tool.setuptools]
+py-modules = ["main", "settings"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["interfaces*", "models*", "utils*"]
+namespaces = true
